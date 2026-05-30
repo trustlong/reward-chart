@@ -18,13 +18,13 @@ function setup() {
 describe('ChartView', () => {
   it('marks a step done when its cell is clicked', async () => {
     const { getChart } = setup();
-    await userEvent.click(screen.getByRole('button', { name: /step 1/i }));
+    await userEvent.click(screen.getByRole('button', { name: 'Step 1' }));
     expect(getChart().completedSteps).toContain(1);
   });
 
   it('shows a celebration when a milestone step is reached', async () => {
     setup();
-    await userEvent.click(screen.getByRole('button', { name: /step 10/i }));
+    await userEvent.click(screen.getByRole('button', { name: 'Step 10' }));
     expect(screen.getByText('First Milestone!')).toBeInTheDocument();
   });
 });

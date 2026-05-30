@@ -59,7 +59,7 @@ export function Settings({ chart, onScaleChange, onMilestoneChange }: SettingsPr
                 max={200}
                 placeholder="–"
                 aria-label={`Milestone ${i + 1} step`}
-                defaultValue={chart.milestones[i] ?? ''}
+                value={chart.milestones[i] ?? ''}
                 onChange={(e) => {
                   const v = e.target.value === '' ? null : parseInt(e.target.value, 10);
                   onMilestoneChange(i, Number.isNaN(v as number) ? null : v);

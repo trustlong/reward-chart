@@ -13,13 +13,13 @@ describe('Grid', () => {
   it('calls onToggle with the clicked step number', async () => {
     const onToggle = vi.fn();
     render(<Grid chart={createChart('id', 'now')} onToggle={onToggle} />);
-    await userEvent.click(screen.getByRole('button', { name: /step 3/i }));
+    await userEvent.click(screen.getByRole('button', { name: 'Step 3' }));
     expect(onToggle).toHaveBeenCalledWith(3);
   });
 
   it('marks completed cells as pressed', () => {
     const chart = toggleStep(createChart('id', 'now'), 1);
     render(<Grid chart={chart} onToggle={() => {}} />);
-    expect(screen.getByRole('button', { name: /step 1/i })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('button', { name: 'Step 1' })).toHaveAttribute('aria-pressed', 'true');
   });
 });

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -16,9 +17,24 @@ describe('Settings', () => {
 
   it('updates a milestone value', async () => {
     const onMilestoneChange = vi.fn();
-    render(
-      <Settings chart={createChart('id', 'now')} onScaleChange={() => {}} onMilestoneChange={onMilestoneChange} />
-    );
+    function Harness() {
+      const [chart, setChart] = useState(createChart('id', 'now'));
+      return (
+        <Settings
+          chart={chart}
+          onScaleChange={() => {}}
+          onMilestoneChange={(i, v) => {
+            onMilestoneChange(i, v);
+            setChart((c) => {
+              const milestones = [...c.milestones];
+              milestones[i] = v;
+              return { ...c, milestones };
+            });
+          }}
+        />
+      );
+    }
+    render(<Harness />);
     const m3 = screen.getByLabelText('Milestone 3 step');
     await userEvent.type(m3, '25');
     expect(onMilestoneChange).toHaveBeenLastCalledWith(2, 25);

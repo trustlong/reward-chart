@@ -23,7 +23,7 @@ export function Cell({ chart, step, onToggle }: CellProps) {
       type="button"
       className={classes.join(' ')}
       aria-pressed={done}
-      aria-label={`Step ${step}${milestoneAt(chart, step) ? ' (milestone)' : ''}`}
+      aria-label={`Step ${step}`}
       onClick={() => onToggle(step)}
     >
       {milestone && !done && <span className="milestone-flag">🏁</span>}
