@@ -1,1 +1,44 @@
-/* styles added in a later task */
+@media print {
+  body {
+    background: white !important;
+    padding: 0;
+  }
+  body::before { display: none; }
+
+  /* Hide interactive-only chrome */
+  .chart-list,
+  .settings-bar,
+  .actions,
+  .btn-add-rule,
+  .legend-card {
+    display: none !important;
+  }
+
+  .header-card,
+  .chart-card,
+  .progress-card {
+    box-shadow: none !important;
+    border: 2px solid #ccc !important;
+    break-inside: avoid;
+  }
+
+  .handwrite-input,
+  .goal-textarea,
+  .rule-input {
+    border-bottom: 1px dashed #aaa !important;
+  }
+
+  /* Large-scale safety: never clip the grid, cap cell size, allow wrapping */
+  .chart-scroll { overflow: visible !important; }
+  #chart-grid {
+    min-width: 0 !important;
+    gap: 3px !important;
+  }
+  .cell {
+    max-width: 48px;
+    border-width: 1px !important;
+    box-shadow: none !important;
+    animation: none !important;
+  }
+  .cell .cell-num { opacity: 0.8; }
+}
