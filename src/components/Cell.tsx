@@ -1,5 +1,5 @@
 import { Chart } from '../domain/types';
-import { milestoneAt, celebrationForStep } from '../domain/milestones';
+import { milestoneAt } from '../domain/milestones';
 
 const MILESTONE_LETTER = ['a', 'b', 'c', 'd'];
 
