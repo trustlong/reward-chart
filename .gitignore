@@ -4,3 +4,7 @@ dist/
 *.tsbuildinfo
 vite.config.d.ts
 vite.config.js
+playwright.config.d.ts
+playwright.config.js
+test-results/
+playwright-report/
