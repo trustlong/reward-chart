@@ -17,13 +17,17 @@ type Props = {
 
 export function ChartView({ chart, onUpdate }: Props) {
   const [celebration, setCelebration] = useState<Celebration | null>(null);
+  const [celebratedSteps, setCelebratedSteps] = useState<Set<number>>(new Set());
 
   const handleToggle = (step: number) => {
     const wasDone = chart.completedSteps.includes(step);
     onUpdate((c) => toggleStep(c, step));
-    if (!wasDone) {
+    if (!wasDone && !celebratedSteps.has(step)) {
       const c = celebrationForStep(chart, step);
-      if (c) setCelebration(c);
+      if (c) {
+        setCelebratedSteps((prev) => new Set(prev).add(step));
+        setCelebration(c);
+      }
     }
   };
 
@@ -42,7 +46,10 @@ export function ChartView({ chart, onUpdate }: Props) {
   };
 
   const handleReset = () => {
-    if (confirm('Reset all progress? This cannot be undone.')) onUpdate(resetProgress);
+    if (confirm('Reset all progress? This cannot be undone.')) {
+      onUpdate(resetProgress);
+      setCelebratedSteps(new Set());
+    }
   };
 
   return (

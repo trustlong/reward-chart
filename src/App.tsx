@@ -12,7 +12,7 @@ export default function App() {
     <div className="chart-wrapper">
       <ChartList store={store} onSelect={selectChart} onNew={newChart} onDelete={deleteChart} />
       {activeChart ? (
-        <ChartView chart={activeChart} onUpdate={updateActiveChart} />
+        <ChartView key={activeChart.id} chart={activeChart} onUpdate={updateActiveChart} />
       ) : (
         <p style={{ textAlign: 'center', fontFamily: 'Caveat, cursive', fontSize: '1.4rem' }}>
           Create a chart to get started! 🌟

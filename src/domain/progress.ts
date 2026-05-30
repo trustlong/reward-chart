@@ -13,10 +13,6 @@ export const ENCOURAGEMENTS = [
   "YOU DID IT! You're a SUPERSTAR! 🏆",
 ];
 
-export function completedCount(chart: Chart): number {
-  return chart.completedSteps.length;
-}
-
 export function progressPercent(chart: Chart): number {
   if (chart.scale === 0) return 0;
   return Math.round((chart.completedSteps.length / chart.scale) * 100);

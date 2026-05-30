@@ -27,4 +27,14 @@ describe('ChartView', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Step 10' }));
     expect(screen.getByText('First Milestone!')).toBeInTheDocument();
   });
+
+  it('does not re-show a milestone celebration after un-marking and re-marking', async () => {
+    setup();
+    const step10 = () => screen.getByRole('button', { name: 'Step 10' });
+    await userEvent.click(step10()); // fires celebration
+    await userEvent.click(screen.getByRole('button', { name: /keep going/i })); // close
+    await userEvent.click(step10()); // un-mark
+    await userEvent.click(step10()); // re-mark — should NOT celebrate again
+    expect(screen.queryByText('First Milestone!')).not.toBeInTheDocument();
+  });
 });
